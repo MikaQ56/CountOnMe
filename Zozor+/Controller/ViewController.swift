@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: - Properties
+    var calculator = Calculator()
+    
     var stringNumbers: [String] = [String()]
     var operators: [String] = ["+"]
     var index = 0
