@@ -11,7 +11,7 @@ import XCTest
 
 class CalculatorTestCase: XCTestCase {
     
-    var calculator = Calculator()
+    var calculator: Calculator!
     
     override func setUp() {
         super.setUp()
@@ -20,9 +20,12 @@ class CalculatorTestCase: XCTestCase {
     
     func testGivenLastStringNumbersIsNotEmpty_WhenCanAddOperatorIsInvoked_ThenOperatorIsAdded() {
         
+        var sign = String()
         calculator.addStringNumber(number: 2)
-        let result = calculator.canAddOperator("+")
-        XCTAssert(result)
+        if calculator.canAddOperator("+") {
+           sign = calculator.getOperators()[1]
+        }
+        XCTAssertEqual(sign, "+")
     }
     
     func testGivenStringNumbersAreTwoAndThree_WhenPlusAndEqualButtonsAreTapped_ThenResultShouldBe5 () {
@@ -35,14 +38,14 @@ class CalculatorTestCase: XCTestCase {
         XCTAssertEqual(result, 5)
     }
     
-    func testGivenStringNumbersAreTwoAndThree_WhenMinusAndEqualButtonsAreTapped_ThenResultShouldBe5 () {
+    func testGivenStringNumbersAreFourAndThree_WhenMinusAndEqualButtonsAreTapped_ThenResultShouldBe1 () {
         
-        calculator.addStringNumber(number: 2)
+        calculator.addStringNumber(number: 4)
         if calculator.canAddOperator("-") {
             calculator.addStringNumber(number: 3)
         }
         let result = calculator.calculateTotal()
-        XCTAssertEqual(result, -1)
+        XCTAssertEqual(result, 1)
     }
     
     func testGivenLastStringNumbersIsempty_WhenSetStringNumbersIsInvoked_ThenStringNumbersIsEqualToOne() {
