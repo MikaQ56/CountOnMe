@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     }
 
     func addNewNumber(_ newNumber: Int) {
-        calculator.updateStringNumbers(addNumber: newNumber)
+        calculator.addStringNumber(number: newNumber)
         updateDisplay()
     }
 

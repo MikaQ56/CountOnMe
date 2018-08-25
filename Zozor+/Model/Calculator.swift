@@ -16,17 +16,6 @@ class Calculator {
     
     private var error = String()
     
-    func canAddOperator(_ test: String) -> Bool {
-        if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
-                return false
-            }
-        }
-        operators.append(test)
-        stringNumbers.append("")
-        return true
-    }
-    
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
@@ -53,12 +42,27 @@ class Calculator {
         return stringNumbers
     }
     
-    func updateStringNumbers(addNumber: Int) {
+    func addStringNumber(number: Int) {
         if let stringNumber = stringNumbers.last {
             var stringNumberMutable = stringNumber
-            stringNumberMutable += "\(addNumber)"
+            stringNumberMutable += "\(number)"
             stringNumbers[stringNumbers.count-1] = stringNumberMutable
         }
+    }
+    
+    func canAddOperator(_ sign: String) -> Bool {
+        if let stringNumber = stringNumbers.last {
+            if stringNumber.isEmpty {
+                return false
+            }
+        }
+        addOperator(sign)
+        return true
+    }
+    
+    private func addOperator(_ sign: String) {
+        operators.append(sign)
+        stringNumbers.append("")
     }
     
     func calculateTotal() -> Int {
