@@ -16,6 +16,8 @@ class Calculator {
     
     private var error = String()
     
+    private var total = 0
+    
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
@@ -28,6 +30,10 @@ class Calculator {
             }
         }
         return true
+    }
+    
+    func getTotal() -> Int {
+        return total
     }
     
     func getError() -> String {
@@ -52,7 +58,7 @@ class Calculator {
     
     func canAddOperator(_ sign: String) -> Bool {
         if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
+            if stringNumber.isEmpty && total == 0 {
                 return false
             }
         }
@@ -66,7 +72,6 @@ class Calculator {
     }
     
     func calculateTotal() -> Int {
-        var total = 0
         for (i, stringNumber) in stringNumbers.enumerated() {
             if let number = Int(stringNumber) {
                 if operators[i] == "+" {
