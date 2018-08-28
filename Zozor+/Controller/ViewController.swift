@@ -75,7 +75,7 @@ class ViewController: UIViewController {
     }
 
     func updateDisplay() {
-        var text = ""
+        var text = String()
         var operators = calculator.getOperators()
         let stringNumbers = calculator.getStringNumbers()
         for (i, stringNumber) in stringNumbers.enumerated() {
