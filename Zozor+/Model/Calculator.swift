@@ -88,4 +88,8 @@ class Calculator {
         stringNumbers = [String()]
         operators = ["+"]
     }
+    
+    func clearTotal() {
+        total = 0
+    }
 }

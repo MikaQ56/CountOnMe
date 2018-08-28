@@ -55,7 +55,11 @@ class ViewController: UIViewController {
             self.present(alertVC, animated: true, completion: nil)
         }
     }
-
+    
+    @IBAction func clearTotal() {
+        calculator.clearTotal()
+        updateDisplay()
+    }
 
     // MARK: - Methods
     
