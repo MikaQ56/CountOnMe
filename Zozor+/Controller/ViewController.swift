@@ -8,18 +8,21 @@
 
 import UIKit
 
+ // MARK: - Properties & outlets
 class ViewController: UIViewController {
     
-    // MARK: - Properties
+   
     var calculator = Calculator()
-
-    // MARK: - Outlets
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    
+}
 
-    // MARK: - Action
+ // MARK: - Actions
+extension ViewController {
 
+    // When number button is tapped, then number is saved in Model & displayed on view
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         for (i, numberButton) in numberButtons.enumerated() {
             if sender == numberButton {
@@ -28,6 +31,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // When plus button is tapped, model checks if operator can be added. If ok, then the operator is saved in model & displayed on view. Else, an alert is displayed
     @IBAction func plus() {
         if calculator.canAddOperator("+") {
             updateDisplay()
@@ -36,6 +40,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // When minus button is tapped, model checks if operator can be added. If ok, then the operator is saved in model & displayed on view. Else, an alert is displayed
     @IBAction func minus() {
         if calculator.canAddOperator("-") {
             updateDisplay()
@@ -44,6 +49,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // When equal button is tapped, model checks if expression is correct. If OK, model calculate & display total. Else, an alert is displayed.
     @IBAction func equal() {
         if calculator.isExpressionCorrect {
             let total = calculator.calculateTotal()
@@ -56,18 +62,26 @@ class ViewController: UIViewController {
         }
     }
     
+    // When clear button is tapped, then total is reset.
     @IBAction func clearTotal() {
         calculator.clearTotal()
         updateDisplay()
     }
+}
 
-    // MARK: - Methods
+// MARK: - Alert
+extension ViewController {
     
+    // An alert is displayed when there is an error
     func alertOperators() {
         let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
+}
+
+// MARK: - Utilities
+extension ViewController {
 
     func addNewNumber(_ newNumber: Int) {
         calculator.addStringNumber(number: newNumber)

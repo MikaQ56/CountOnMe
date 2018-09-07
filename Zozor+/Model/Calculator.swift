@@ -18,6 +18,7 @@ class Calculator {
     
     private var total = 0
     
+    // Ckecks if expression is correct. Returns Boolean. And saves errors...
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
@@ -32,22 +33,27 @@ class Calculator {
         return true
     }
     
+    // Get the total property
     func getTotal() -> Int {
         return total
     }
     
+    // Get the error
     func getError() -> String {
         return error
     }
     
+    // Get all operators tapped from user
     func getOperators() -> [String] {
         return operators
     }
     
+    // Get all numbers tapped from user
     func getStringNumbers() -> [String]{
         return stringNumbers
     }
     
+    // Add a number tapped from user. Save in String type
     func addStringNumber(number: Int) {
         if let stringNumber = stringNumbers.last {
             var stringNumberMutable = stringNumber
@@ -56,6 +62,7 @@ class Calculator {
         }
     }
     
+    // Check if operator can be added by user. Return a boolean.
     func canAddOperator(_ sign: String) -> Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
@@ -71,11 +78,13 @@ class Calculator {
         return true
     }
     
+    // If previous method returns true then we can add operator.
     private func addOperator(_ sign: String) {
         operators.append(sign)
         stringNumbers.append("")
     }
     
+    // Calculate total...
     func calculateTotal() -> Int {
         clearTotal()
         for (i, stringNumber) in stringNumbers.enumerated() {
