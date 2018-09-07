@@ -18,6 +18,24 @@ class CalculatorTestCase: XCTestCase {
         self.calculator = Calculator()
     }
     
+    func testGivenExpressionIsIncorrect_WhenEqualButtonTapped_ThenIsFalse() {
+        calculator.addStringNumber(number: 2)
+        if calculator.canAddOperator("+") {}
+        XCTAssert(!calculator.isExpressionCorrect)
+    }
+    
+    func testGivenExpressionIsEmpty_WhenEqualButtonTapped_ThenIsFalse() {
+        XCTAssert(!calculator.isExpressionCorrect)
+    }
+    
+    func testGivenExpressionIsCorrect_WhenEqualButtonTapped_ThenIsTrue() {
+        calculator.addStringNumber(number: 2)
+        if calculator.canAddOperator("+") {
+            calculator.addStringNumber(number: 3)
+        }
+         XCTAssert(calculator.isExpressionCorrect)
+    }
+    
     func testGivenLastStringNumbersIsNotEmpty_WhenCanAddOperatorIsInvoked_ThenOperatorIsAdded() {
         
         var sign = String()
@@ -26,6 +44,23 @@ class CalculatorTestCase: XCTestCase {
            sign = calculator.getOperators()[1]
         }
         XCTAssertEqual(sign, "+")
+    }
+    
+    func testGivenLastStringNumbersIsEmptyAndTotalIsZero_WhenCanAddOperatorIsInvoked_ThenOperatorIsNotAdded() {
+        
+        XCTAssert(!calculator.canAddOperator("+"))
+    }
+    
+    func testGivenLastStringNumbersIsEmptyAndTotalNotNull_WhenCanAddOperatorIsInvoked_ThenOperatorIsTrue() {
+        
+        calculator.addStringNumber(number: 2)
+        if calculator.canAddOperator("+") {
+            calculator.addStringNumber(number: 3)
+        }
+        let total = calculator.calculateTotal()
+        print(total)
+        calculator.clear()
+        XCTAssert(calculator.canAddOperator("+"))
     }
     
     func testGivenStringNumbersAreTwoAndThree_WhenPlusAndEqualButtonsAreTapped_ThenResultShouldBe5 () {
@@ -54,5 +89,29 @@ class CalculatorTestCase: XCTestCase {
         XCTAssertEqual(calculator.getStringNumbers()[0], "1")
     }
     
+    func testGivenIsError_WhenEqualButtonTapped_ThenErrorIsReturn() {
+        calculator.addStringNumber(number: 2)
+        if calculator.canAddOperator("+") {}
+        if calculator.isExpressionCorrect {}
+        XCTAssertEqual(calculator.getError(), "Entrez une expression correcte !")
+    }
+    
+    func testGivenStringNumbersCountNotEmpty_WhenClearMethodIsInvoked_ThenStringNumbersIsEmpty() {
+        calculator.addStringNumber(number: 2)
+        calculator.clear()
+        XCTAssertEqual(calculator.getStringNumbers(), [""])
+        XCTAssertEqual(calculator.getOperators(), ["+"])
+    }
+    
+    func testGivenExpressionIsCorrect_WhenEqualButtonTapped_ThenGetTotalMethodShouldReturn5 () {
+        
+        calculator.addStringNumber(number: 2)
+        if calculator.canAddOperator("+") {
+            calculator.addStringNumber(number: 3)
+        }
+        let result = calculator.calculateTotal()
+        print(result)
+        XCTAssertEqual(calculator.getTotal(), 5)
+    }
 }
 

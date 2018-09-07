@@ -19,7 +19,6 @@ class Calculator {
     private var total = 0
     
     var isExpressionCorrect: Bool {
-        print(stringNumbers)
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
                 if stringNumbers.count == 1 {
